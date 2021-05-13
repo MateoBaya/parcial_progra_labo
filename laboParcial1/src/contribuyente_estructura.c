@@ -53,7 +53,7 @@ int ABMLectura(eContribuyentes varGeneral[],int len)
 {
 	int funcionar=0;
 	printf("\n************************************************************************************************\n");
-	printf("   Id   | CUIL |  Nombre  |  Apellido   \n");
+	printf("   Id   |    CUIL    |   Nombre  |    Apellido   \n");
 	printf("************************************************************************************************\n");
 
 	for(int i=0;i<len;i++)
@@ -107,7 +107,7 @@ const char * mensajeOpcion2,const char * mensajeOpcion3)
 		{
 			printf("No se encontro el legajo, reintente");
 		}else{
-			printf("   Id   | CUIL |  Nombre  |  Apellido   \n");
+			printf("   Id   |          CUIL           |   Nombre  |    Apellido   \n");
 			if(validarIntencionUsuario(varGeneral, posicionACambiar, "ESTRUCTURA", "modificar"))
 			{
 
@@ -203,7 +203,7 @@ int ABMinformes()
 int mostrarEstructura(eContribuyentes varGeneral[],int i)
 {
 	int funcionar=0;
-	printf(/*" %-5d     %-5c  %-5d    %-5d       %-5d      %-10f      %-15s    %-5d\n"*/"%-5d\n",varGeneral[i].idGeneral);
+	printf("  %-5d     %-15s  %-10s   %-10s   \n",varGeneral[i].idGeneral,varGeneral[i].CUIL,varGeneral[i].nombre,varGeneral[i].apellido);
 	return funcionar;
 }
 
