@@ -1,60 +1,57 @@
-#include "utn_estructura.h"
+#include "contribuyente_estructura.h"
+#include "utn_general.h"
+
 
 ///////////////////////////////////FUNCIONES_ABM///////////////////////////////////////////////////////
 
-int ABMAlta(estructuraGeneral varGeneral[],int len,int * id)
+int ABMAlta(eContribuyentes varContribuyente[],int len,int * id)
 {
-	int funcionar=0;
+	int funciona=0;
 	int i=0;
 	int error;
-	int auxEntero;
-	char auxChar;
 	char auxTexto[MAXCHAR];
 
-	while(varGeneral[i].isEmpty==0)
-	{
-		i++;
-	}
-	if(varGeneral[i].isEmpty==1)
-	{
-		*id=*id+1;
-		varGeneral[i].idGeneral=*id;
-
-		do
+		if(varContribuyente != NULL)
 		{
-			printf("Cargue VALOR1: ");
-			error = cargarNumero(&auxEntero);
-		}while(error);
 
-		varGeneral[i].valor1 = auxEntero;
+			while(varContribuyente[i].isEmpty==0)
+			{
+				i++;
+			}
+			if(varContribuyente[i].isEmpty==1)
+			{
+				*id=*id+1;
+				varContribuyente[i].idGeneral=*id;
 
-		do
-		{
-			printf("Cargue VALOR2: ");
-			error = cargarNumero(&auxEntero);
-		}while(error);
+				printf("Cargue el CUIL: ");
+				do
+				{
+					error=cargarTexto(auxTexto);
+				}while(error == 0);
+				strcpy(varContribuyente[i].CUIL,auxTexto);
 
-		varGeneral[i].valor2 = auxEntero;
+				printf("Cargue el nombre: ");
+				do
+				{
+					error=cargarTexto(auxTexto);
+				}while(error==0);
+				strcpy(varContribuyente[i].nombre,auxTexto);
 
-		do
-		{
-			error=cargarCaracter(&auxChar);
-		}while(error);
-		varGeneral[i].caracter=auxChar;
+				printf("Cargue el apellido: ");
+				do
+				{
+					error=cargarTexto(auxTexto);
+				}while(error==0);
+				strcpy(varContribuyente[i].apellido,auxTexto);
 
-		do
-		{
-			error=cargarTexto(auxTexto);
-		}while(error==0);
-		strcpy(varGeneral[i].descripcion,auxTexto);
-
-		varGeneral[i].isEmpty=0;
+				varContribuyente[i].isEmpty=0;
+			}
 	}
 
-	return funcionar;
+	return funciona;
 }
 
-int ABMLectura(estructuraGeneral varGeneral[],int len)
+int ABMLectura(eContribuyentes varGeneral[],int len)
 {
 	int funcionar=0;
 	printf("\n************************************************************************************************\n");
@@ -75,7 +72,7 @@ int ABMLectura(estructuraGeneral varGeneral[],int len)
 	return funcionar;
 }
 
-int ABMBaja(estructuraGeneral varGeneral[],int len)
+int ABMBaja(eContribuyentes varGeneral[],int len)
 {
 	int funcionar=0;
 	int posicionACambiar;
@@ -97,7 +94,7 @@ int ABMBaja(estructuraGeneral varGeneral[],int len)
 	return funcionar;
 }
 
-int ABMModificar(estructuraGeneral varGeneral[],int len,const char * deseoModificar,const char * mensajeOpcion1,
+int ABMModificar(eContribuyentes varGeneral[],int len,const char * deseoModificar,const char * mensajeOpcion1,
 const char * mensajeOpcion2,const char * mensajeOpcion3,const char * mensajeOpcion4)
 {
 	int funcionar=0;
@@ -139,12 +136,11 @@ const char * mensajeOpcion2,const char * mensajeOpcion3,const char * mensajeOpci
 								printf("ERROR. Demasiados caracteres, reintente.");
 							}else
 							{
-								strcpy(varGeneral[posicionACambiar].descripcion,auxTexto);
+								strcpy(varGeneral[posicionACambiar].nombre,auxTexto);
 							}
 							break;
 						case 'X':
 							printf("Ingrese un %s nuevo: ",mensajeOpcion2);
-							cargarCaracter(&varGeneral[posicionACambiar].caracter);
 							break;
 						case 'Y':
 							printf("Ingrese un %s nuevo: ",mensajeOpcion3);
@@ -154,18 +150,15 @@ const char * mensajeOpcion2,const char * mensajeOpcion3,const char * mensajeOpci
 								printf("ERROR. No escribio un numero, reintente.");
 							}else
 							{
-								varGeneral[posicionACambiar].valor1 = auxEntero;
 							}
 							break;
 						case 'Z':
 							printf("Ingrese un %s nuevo: ",mensajeOpcion4);
-							auxEntero=cargarNumero(&auxEntero);
 							if (auxEntero)
 							{
 								printf("ERROR. No escribio un numero, reintente.");
 							}else
 							{
-								varGeneral[posicionACambiar].valor2 = auxEntero;
 							}
 							break;
 						default:
@@ -182,7 +175,7 @@ const char * mensajeOpcion2,const char * mensajeOpcion3,const char * mensajeOpci
 
 int ABMinformes()
 {
-	int funcionar;
+	int funcionar=0;
 	int decidir;
 
 	do
@@ -200,7 +193,7 @@ int ABMinformes()
 		}
 	}else
 	{
-		pritf("Valor fuera de rango");
+		printf("Valor fuera de rango");
 	}
 	}while(decidir!=3);
 
@@ -209,14 +202,14 @@ int ABMinformes()
 
 ///////////////////////////////////BUSQUEDA_INFORMACION////////////////////////////////////////////////
 
-int mostrarEstructura(estructuraGeneral varGeneral[],int i)
+int mostrarEstructura(eContribuyentes varGeneral[],int i)
 {
 	int funcionar=0;
 	printf(/*" %-5d     %-5c  %-5d    %-5d       %-5d      %-10f      %-15s    %-5d\n"*/"%-5d\n",varGeneral[i].idGeneral);
 	return funcionar;
 }
 
-int buscarId(estructuraGeneral varGeneral[],int len)
+int buscarId(eContribuyentes varGeneral[],int len)
 {
 	int posicion=-1;
 	int i;
@@ -240,7 +233,7 @@ int buscarId(estructuraGeneral varGeneral[],int len)
 	return posicion;
 }
 
-int buscarDescripcion(estructuraGeneral varGeneral[],int len)
+int buscarDescripcion(eContribuyentes varGeneral[],int len)
 {
 	int id=-1;
 	int i;
@@ -251,7 +244,7 @@ int buscarDescripcion(estructuraGeneral varGeneral[],int len)
 	{
 		if(varGeneral[i].isEmpty==0)
 		{
-			if(strcmp(auxString,varGeneral[i].descripcion)==0)
+			if(strcmp(auxString,varGeneral[i].nombre)==0)
 			{
 				id = varGeneral[i].idGeneral;
 				break;
@@ -264,7 +257,7 @@ int buscarDescripcion(estructuraGeneral varGeneral[],int len)
 
 ///////////////////////////////////VALIDACIONES_ESTRUCTURAS////////////////////////////////////////////
 
-int validarId(estructuraGeneral varGeneral[],int len,int numero)
+int validarId(eContribuyentes varGeneral[],int len,int numero)
 {
 	int funcionar=0;
 	if(varGeneral != NULL)
@@ -280,7 +273,7 @@ int validarId(estructuraGeneral varGeneral[],int len,int numero)
 	return funcionar;
 }
 
-int validarIntencionUsuario(estructuraGeneral varGeneral[],int posicionACambiar,const char * mensaje,const char * textoAValidar)
+int validarIntencionUsuario(eContribuyentes varGeneral[],int posicionACambiar,const char * mensaje,const char * textoAValidar)
 {
 	int funcionar=0;
 	char decidir;
@@ -304,7 +297,7 @@ int validarIntencionUsuario(estructuraGeneral varGeneral[],int posicionACambiar,
 
 //////////////////////////////////////////FUNCIONES_ESTRUCTURAS////////////////////////////////////////
 
-int inicializarisEmpty(estructuraGeneral varGeneral[],int len)
+int inicializarisEmpty(eContribuyentes varGeneral[],int len)
 {
 	int funcionar=0;
 	if(varGeneral != NULL)
@@ -318,40 +311,40 @@ int inicializarisEmpty(estructuraGeneral varGeneral[],int len)
 
 	return funcionar;
 }
-
-int promediar(estructuraGeneral varGeneral[],int i,float * resultado)
+/*
+int promediar(eContribuyentes varGeneral[],int i,float * resultado)
 {
 	int funcionar=0;
 
 	if(varGeneral != NULL)
 	{
-		*resultado = (varGeneral[i].valor1 + varGeneral[i].valor2)/2;
+		*resultado = (varGeneral[i].CUIL + varGeneral[i].valor2)/2;
 		funcionar=1;
 	}
 
 	return funcionar;
 }
-
-int multiplicar(estructuraGeneral varGeneral[],int i,int * resultado)
+*/
+/*
+int multiplicar(eContribuyentes varGeneral[],int i,int * resultado)
 {
 	int funcionar=0;
 	if(varGeneral != NULL)
 	{
-		*resultado = varGeneral[i].valor1 * varGeneral[i].valor2;
+		*resultado = varGeneral[i].CUIL * varGeneral[i].valor2;
 		funcionar=1;
 	}
 	return funcionar;
 }
+*/
 
 ///////////////////////////////////////ORDENAMIENTOS////////////////////////////////////////////////////
 
-int ordenarPorId(estructuraGeneral varGeneral[],int len)
+int ordenarPorId(eContribuyentes varGeneral[],int len)
 {
 	int funcionar=0;
 	int flagNoOrdenado=1;
 		int aux;
-		char auxChar;
-		float auxFloat;
 		char auxArrayTexto[MAXCHAR];
 		if(varGeneral != NULL)
 		{
@@ -366,22 +359,9 @@ int ordenarPorId(estructuraGeneral varGeneral[],int len)
 						varGeneral[i].idGeneral=varGeneral[i-1].idGeneral;
 						varGeneral[i-1].idGeneral=aux;
 
-						auxChar=varGeneral[i].caracter;
-						varGeneral[i].caracter=varGeneral[i-1].caracter;
-						varGeneral[i-1].caracter=auxChar;
-
-						aux=varGeneral[i].valor1;
-						varGeneral[i].valor1=varGeneral[i-1].valor1;
-						varGeneral[i-1].valor1=aux;
-
-						aux=varGeneral[i].valor2;
-						varGeneral[i].valor2=varGeneral[i-1].valor2;
-						varGeneral[i-1].valor2=aux;
-
-
-						strcpy(auxArrayTexto,varGeneral[i].descripcion);
-						strcpy(varGeneral[i].descripcion,varGeneral[i-1].descripcion);
-						strcpy(varGeneral[i-1].descripcion,auxArrayTexto);
+						strcpy(auxArrayTexto,varGeneral[i].nombre);
+						strcpy(varGeneral[i].nombre,varGeneral[i-1].nombre);
+						strcpy(varGeneral[i-1].nombre,auxArrayTexto);
 
 					}
 

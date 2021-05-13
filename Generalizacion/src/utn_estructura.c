@@ -2,7 +2,7 @@
 
 ///////////////////////////////////FUNCIONES_ABM///////////////////////////////////////////////////////
 
-int ABMAlta(estructuraGeneral varGeneral[],int len,int * id)
+int ABMAlta(eContribuyentes varGeneral[],int len,int * id)
 {
 	int funcionar=0;
 	int i=0;
@@ -54,7 +54,7 @@ int ABMAlta(estructuraGeneral varGeneral[],int len,int * id)
 	return funcionar;
 }
 
-int ABMLectura(estructuraGeneral varGeneral[],int len)
+int ABMLectura(eContribuyentes varGeneral[],int len)
 {
 	int funcionar=0;
 	printf("\n************************************************************************************************\n");
@@ -75,7 +75,7 @@ int ABMLectura(estructuraGeneral varGeneral[],int len)
 	return funcionar;
 }
 
-int ABMBaja(estructuraGeneral varGeneral[],int len)
+int ABMBaja(eContribuyentes varGeneral[],int len)
 {
 	int funcionar=0;
 	int posicionACambiar;
@@ -97,7 +97,7 @@ int ABMBaja(estructuraGeneral varGeneral[],int len)
 	return funcionar;
 }
 
-int ABMModificar(estructuraGeneral varGeneral[],int len,const char * deseoModificar,const char * mensajeOpcion1,
+int ABMModificar(eContribuyentes varGeneral[],int len,const char * deseoModificar,const char * mensajeOpcion1,
 const char * mensajeOpcion2,const char * mensajeOpcion3,const char * mensajeOpcion4)
 {
 	int funcionar=0;
@@ -209,14 +209,14 @@ int ABMinformes()
 
 ///////////////////////////////////BUSQUEDA_INFORMACION////////////////////////////////////////////////
 
-int mostrarEstructura(estructuraGeneral varGeneral[],int i)
+int mostrarEstructura(eContribuyentes varGeneral[],int i)
 {
 	int funcionar=0;
 	printf(/*" %-5d     %-5c  %-5d    %-5d       %-5d      %-10f      %-15s    %-5d\n"*/"%-5d\n",varGeneral[i].idGeneral);
 	return funcionar;
 }
 
-int buscarId(estructuraGeneral varGeneral[],int len)
+int buscarId(eContribuyentes varGeneral[],int len)
 {
 	int posicion=-1;
 	int i;
@@ -240,7 +240,7 @@ int buscarId(estructuraGeneral varGeneral[],int len)
 	return posicion;
 }
 
-int buscarDescripcion(estructuraGeneral varGeneral[],int len)
+int buscarDescripcion(eContribuyentes varGeneral[],int len)
 {
 	int id=-1;
 	int i;
@@ -264,7 +264,7 @@ int buscarDescripcion(estructuraGeneral varGeneral[],int len)
 
 ///////////////////////////////////VALIDACIONES_ESTRUCTURAS////////////////////////////////////////////
 
-int validarId(estructuraGeneral varGeneral[],int len,int numero)
+int validarId(eContribuyentes varGeneral[],int len,int numero)
 {
 	int funcionar=0;
 	if(varGeneral != NULL)
@@ -280,7 +280,7 @@ int validarId(estructuraGeneral varGeneral[],int len,int numero)
 	return funcionar;
 }
 
-int validarIntencionUsuario(estructuraGeneral varGeneral[],int posicionACambiar,const char * mensaje,const char * textoAValidar)
+int validarIntencionUsuario(eContribuyentes varGeneral[],int posicionACambiar,const char * mensaje,const char * textoAValidar)
 {
 	int funcionar=0;
 	char decidir;
@@ -304,7 +304,7 @@ int validarIntencionUsuario(estructuraGeneral varGeneral[],int posicionACambiar,
 
 //////////////////////////////////////////FUNCIONES_ESTRUCTURAS////////////////////////////////////////
 
-int inicializarisEmpty(estructuraGeneral varGeneral[],int len)
+int inicializarisEmpty(eContribuyentes varGeneral[],int len)
 {
 	int funcionar=0;
 	if(varGeneral != NULL)
@@ -319,7 +319,7 @@ int inicializarisEmpty(estructuraGeneral varGeneral[],int len)
 	return funcionar;
 }
 
-int promediar(estructuraGeneral varGeneral[],int i,float * resultado)
+int promediar(eContribuyentes varGeneral[],int i,float * resultado)
 {
 	int funcionar=0;
 
@@ -332,7 +332,7 @@ int promediar(estructuraGeneral varGeneral[],int i,float * resultado)
 	return funcionar;
 }
 
-int multiplicar(estructuraGeneral varGeneral[],int i,int * resultado)
+int multiplicar(eContribuyentes varGeneral[],int i,int * resultado)
 {
 	int funcionar=0;
 	if(varGeneral != NULL)
@@ -345,7 +345,7 @@ int multiplicar(estructuraGeneral varGeneral[],int i,int * resultado)
 
 ///////////////////////////////////////ORDENAMIENTOS////////////////////////////////////////////////////
 
-int ordenarPorId(estructuraGeneral varGeneral[],int len)
+int ordenarPorId(eContribuyentes varGeneral[],int len)
 {
 	int funcionar=0;
 	int flagNoOrdenado=1;

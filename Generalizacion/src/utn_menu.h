@@ -2,6 +2,6 @@
 #define UTN_MENU_H_
 #include "utn_estructura.h"
 
-int menuABM(estructuraGeneral varGeneral[],int len,char texto[]);
+int menuABM(eContribuyentes varGeneral[],int len,char texto[]);
 
 #endif /* UTN_MENU_H_ */

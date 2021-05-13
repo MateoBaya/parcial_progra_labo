@@ -1,18 +1,18 @@
-#ifndef UTN_ESTRUCTURA_H_
-#define UTN_ESTRUCTURA_H_
+#ifndef CONTRIBUYENTE_ESTRUCTURA_H_
+#define CONTRIBUYENTE_ESTRUCTURA_H_
 
 #include <stdio.h>
 #include <string.h>
 #include "utn_general.h"
 
 
+
 typedef struct
 {
 	int idGeneral;
-	char caracter;
-	int valor1;
-	int valor2;
-	char descripcion[MAXCHAR];
+	char CUIL[MAXCHAR];
+	char nombre[MAXCHAR];
+	char apellido[MAXCHAR];
 	int isEmpty;
 }eContribuyentes;
 
@@ -49,4 +49,4 @@ int inicializarisEmpty(eContribuyentes varGeneral[],int len);
 
 int ordenarPorId(eContribuyentes varGeneral[],int len);
 
-#endif /* UTN_ESTRUCTURA_H_ */
+#endif /* CONTRIBUYENTE_ESTRUCTURA_H_ */

@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-#include "utn_estructura.h"
+#include "contribuyente_estructura.h"
 #include "utn_general.h"
 
-int menuABM(estructuraGeneral varGeneral[],int len,char texto[])
+int menuABM(eContribuyentes varGeneral[],int len,char texto[])
 {
 	int eleccionUsuario;
 	int funcionar;
@@ -15,7 +15,7 @@ int menuABM(estructuraGeneral varGeneral[],int len,char texto[])
 		do
 		{
 			printf("\n///////////////////////////////////////////\n");
-			printf("///    %-9s                        ///\n",texto);
+			printf("///    %-13s                   ///\n",texto);
 			printf("///      [1]-ALTA                       ///\n");
 			printf("///      [2]-BAJA                       ///\n");
 			printf("///      [3]-LECTURA                    ///\n");

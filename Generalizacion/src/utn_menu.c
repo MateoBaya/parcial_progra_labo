@@ -3,7 +3,7 @@
 #include "utn_estructura.h"
 #include "utn_general.h"
 
-int menuABM(estructuraGeneral varGeneral[],int len,char texto[])
+int menuABM(eContribuyentes varGeneral[],int len,char texto[])
 {
 	int eleccionUsuario;
 	int funcionar;

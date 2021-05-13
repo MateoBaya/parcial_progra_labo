@@ -245,6 +245,8 @@ int validarCUIT(char array[],int len)
 	int flagPrimerGuion=1;
 	int flagSegundoGuion=1;
 
+	printf("%d",acumFuncionando);
+
 
 	for(int i=0;i<len;i++)
 	{
@@ -266,6 +268,7 @@ int validarCUIT(char array[],int len)
 			break;
 		}
 	}
+	printf("%d",acumFuncionando);
 
 	if(acumFuncionando==13)
 	{
