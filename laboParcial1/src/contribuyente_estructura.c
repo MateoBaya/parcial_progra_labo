@@ -53,7 +53,7 @@ int ABMLectura(eContribuyentes varGeneral[],int len)
 {
 	int funcionar=0;
 	printf("\n************************************************************************************************\n");
-	printf("   Id   |    CUIL    |   Nombre  |    Apellido   \n");
+	printf("   Id   |    CUIL    |     Nombre    |    Apellido   \n");
 	printf("************************************************************************************************\n");
 
 	for(int i=0;i<len;i++)
@@ -82,7 +82,7 @@ int ABMBaja(eContribuyentes varGeneral[],int len)
 		{
 			printf("No se encontro el id, reintente");
 		}else{
-			printf("   Id   | 4L | 4L  |  6L  |  6L   |   8L  |    8L    |   9L\n");
+			printf("   Id   |    CUIL    |     Nombre    |    Apellido   \n");
 			if(validarIntencionUsuario(varGeneral, posicionACambiar, "ESTRUCTURA", "eliminar"))
 			{
 				varGeneral[posicionACambiar].isEmpty = 1;
@@ -107,13 +107,12 @@ const char * mensajeOpcion2,const char * mensajeOpcion3)
 		{
 			printf("No se encontro el legajo, reintente");
 		}else{
-			printf("   Id   |          CUIL           |   Nombre  |    Apellido   \n");
+			printf("   Id   |    CUIL    |     Nombre    |    Apellido   \n");
 			if(validarIntencionUsuario(varGeneral, posicionACambiar, "ESTRUCTURA", "modificar"))
 			{
 
-				printf("Desea modificar %s: ",deseoModificar);
-				fflush(stdin);
-				scanf("%c",&elegir);
+				printf("Desea modificar %s, [c]-CUIL, [n]-Nombre, [a]-Apellido: ",deseoModificar);
+				cargarCaracter(&elegir);
 				do
 				{
 					if(flagError)
