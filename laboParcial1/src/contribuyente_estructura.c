@@ -1,6 +1,4 @@
 #include "contribuyente_estructura.h"
-#include "utn_general.h"
-
 
 ///////////////////////////////////FUNCIONES_ABM///////////////////////////////////////////////////////
 
@@ -55,7 +53,7 @@ int ABMLectura(eContribuyentes varGeneral[],int len)
 {
 	int funcionar=0;
 	printf("\n************************************************************************************************\n");
-	printf("   Id   | 4L | 4L  |  6L  |  6L   |   8L  |    8L    |   9L\n");
+	printf("   Id   | CUIL |  Nombre  |  Apellido   \n");
 	printf("************************************************************************************************\n");
 
 	for(int i=0;i<len;i++)
@@ -95,13 +93,12 @@ int ABMBaja(eContribuyentes varGeneral[],int len)
 }
 
 int ABMModificar(eContribuyentes varGeneral[],int len,const char * deseoModificar,const char * mensajeOpcion1,
-const char * mensajeOpcion2,const char * mensajeOpcion3,const char * mensajeOpcion4)
+const char * mensajeOpcion2,const char * mensajeOpcion3)
 {
 	int funcionar=0;
 	int posicionACambiar;
 	char elegir;
 	int flagError=1;
-	int auxEntero;
 	char auxTexto[MAXCHAR];
 	if(varGeneral != NULL)
 	{
@@ -110,7 +107,7 @@ const char * mensajeOpcion2,const char * mensajeOpcion3,const char * mensajeOpci
 		{
 			printf("No se encontro el legajo, reintente");
 		}else{
-			printf("   Id   | 4L | 4L  |  6L  |  6L   |   8L  |    8L    |   9L\n");
+			printf("   Id   | CUIL |  Nombre  |  Apellido   \n");
 			if(validarIntencionUsuario(varGeneral, posicionACambiar, "ESTRUCTURA", "modificar"))
 			{
 
@@ -128,8 +125,19 @@ const char * mensajeOpcion2,const char * mensajeOpcion3,const char * mensajeOpci
 					}
 					switch(elegir)
 					{
-						case 'd':
+						case 'c':
 							printf("Ingrese un %s nuevo: ",mensajeOpcion1);
+							cargarTexto(auxTexto);
+							if (auxTexto==0)
+							{
+								printf("ERROR. Demasiados caracteres, reintente.");
+							}else
+							{
+								strcpy(varGeneral[posicionACambiar].CUIL,auxTexto);
+							}
+							break;
+						case 'n':
+							printf("Ingrese un %s nuevo: ",mensajeOpcion2);
 							cargarTexto(auxTexto);
 							if (auxTexto==0)
 							{
@@ -138,27 +146,17 @@ const char * mensajeOpcion2,const char * mensajeOpcion3,const char * mensajeOpci
 							{
 								strcpy(varGeneral[posicionACambiar].nombre,auxTexto);
 							}
+
 							break;
-						case 'X':
-							printf("Ingrese un %s nuevo: ",mensajeOpcion2);
-							break;
-						case 'Y':
+						case 'a':
 							printf("Ingrese un %s nuevo: ",mensajeOpcion3);
-							auxEntero=cargarNumero(&auxEntero);
-							if (auxEntero)
+							cargarTexto(auxTexto);
+							if (auxTexto==0)
 							{
-								printf("ERROR. No escribio un numero, reintente.");
+								printf("ERROR. Demasiados caracteres, reintente.");
 							}else
 							{
-							}
-							break;
-						case 'Z':
-							printf("Ingrese un %s nuevo: ",mensajeOpcion4);
-							if (auxEntero)
-							{
-								printf("ERROR. No escribio un numero, reintente.");
-							}else
-							{
+								strcpy(varGeneral[posicionACambiar].apellido,auxTexto);
 							}
 							break;
 						default:

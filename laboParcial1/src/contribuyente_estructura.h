@@ -25,7 +25,7 @@ int ABMLectura(eContribuyentes varGeneral[],int len);
 int ABMBaja(eContribuyentes varAlumno[],int len);
 
 int ABMModificar(eContribuyentes varGeneral[],int len,const char * deseoModificar,const char * mensajeOpcion1,
-const char * mensajeOpcion2,const char * mensajeOpcion3,const char * mensajeOpcion4);
+const char * mensajeOpcion2,const char * mensajeOpcion3);
 
 //////////////////////////////////BUSQUEDA_INFORMACION/////////////////////////////////////////////////
 

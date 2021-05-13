@@ -44,7 +44,7 @@ int menuABM(eContribuyentes varGeneral[],int len,char texto[])
 				funcionar=1;
 				break;
 			case 4:
-				ABMModificar(varGeneral, len, "ESTRUCTURA", "DESCRIPCION", "CARACTER", "VALOR1", "VALOR2");
+				ABMModificar(varGeneral, len, "contribuyentes", "CUIL", "nombre", "apellido");
 				funcionar=1;
 				break;
 			case 5:
