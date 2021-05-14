@@ -9,7 +9,7 @@
 
 typedef struct
 {
-	int idGeneral;
+	int idContribuyente;
 	char CUIL[MAXCHAR];
 	char nombre[MAXCHAR];
 	char apellido[MAXCHAR];
@@ -18,35 +18,35 @@ typedef struct
 
 ///////////////////////////////////FUNCIONES_ABM///////////////////////////////////////////////////////
 
-int ABMAlta(eContribuyentes varGeneral[],int len,int * id);
+int ABMAltaC(eContribuyentes varContribuyente[],int len,int * id);
 
-int ABMLectura(eContribuyentes varGeneral[],int len);
+int ABMLecturaC(eContribuyentes varGeneral[],int len);
 
-int ABMBaja(eContribuyentes varAlumno[],int len);
+int ABMBajaC(eContribuyentes varAlumno[],int len);
 
-int ABMModificar(eContribuyentes varGeneral[],int len,const char * deseoModificar,const char * mensajeOpcion1,
+int ABMModificarC(eContribuyentes varGeneral[],int len,const char * deseoModificar,const char * mensajeOpcion1,
 const char * mensajeOpcion2,const char * mensajeOpcion3);
 
 //////////////////////////////////BUSQUEDA_INFORMACION/////////////////////////////////////////////////
 
-int mostrarEstructura(eContribuyentes varGeneral[],int i);
+int mostrarEstructuraC(eContribuyentes varGeneral[],int i);
 
-int buscarId(eContribuyentes varGeneral[],int len);
+int buscarIdC(eContribuyentes varGeneral[],int len);
 
-int buscarDescripcion(eContribuyentes varGeneral[],int len);
+int buscarDescripcionC(eContribuyentes varGeneral[],int len);
 
 ///////////////////////////////////VALIDACIONES_ESTRUCTURAS////////////////////////////////////////////
 
-int validarId(eContribuyentes varGeneral[],int len,int numero);
+int validarIdC(eContribuyentes varGeneral[],int len,int numero);
 
-int validarIntencionUsuario(eContribuyentes varGeneral[],int posicionACambiar,const char * mensaje,const char * textoAValidar);
+int validarIntencionUsuarioC(eContribuyentes varGeneral[],int posicionACambiar,const char * mensaje,const char * textoAValidar);
 
 //////////////////////////////////////////FUNCIONES_ESTRUCTURAS////////////////////////////////////////
 
-int inicializarisEmpty(eContribuyentes varGeneral[],int len);
+int inicializarisEmptyC(eContribuyentes varGeneral[],int len);
 
 ///////////////////////////////////////ORDENAMIENTOS////////////////////////////////////////////////////
 
-int ordenarPorId(eContribuyentes varGeneral[],int len);
+int ordenarPorIdC(eContribuyentes varGeneral[],int len);
 
 #endif /* CONTRIBUYENTE_ESTRUCTURA_H_ */

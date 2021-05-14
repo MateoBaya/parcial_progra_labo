@@ -1,14 +1,11 @@
 #include <stdio.h>
 #include "contribuyente_menu.h"
+#include "recaudaciones_estructura.h"
+#include "recaudaciones_menu.h"
 #include "utn_general.h"
 #define cantidadContribuyentes 50
 #define cantidadRecaudacion 50
-#define ARBA 1
-#define IIBB 2
-#define GANANCIAS 3
-#define DEBE 1
-#define REFINANCIAR 2
-#define SALDADO 3
+
 
 int main(void)
 {
@@ -16,7 +13,13 @@ int main(void)
 	int elegir;
 	int error;
 	eContribuyentes contribuyentes[cantidadContribuyentes];
-	inicializarisEmpty(contribuyentes,cantidadContribuyentes);
+	eRecaudaciones recaudaciones[cantidadRecaudacion];
+	inicializarisEmptyC(contribuyentes,cantidadContribuyentes);
+	inicializarisEmptyR(recaudaciones, cantidadRecaudacion);
+	int legajoRecaudaciones=100;
+	int legajoContribuyente=1000;
+
+
 
 	do
 	{
@@ -28,9 +31,10 @@ int main(void)
 			switch(elegir)
 			{
 			case 1:
-					menuABM(contribuyentes, cantidadContribuyentes, "Contribuyentes");
+				menuContribuyente(contribuyentes, cantidadContribuyentes, "Contribuyentes",&legajoContribuyente);
 				break;
 			case 2:
+				menuRecaudaciones(recaudaciones, cantidadRecaudacion, "Recaudaciones",&legajoRecaudaciones);
 				break;
 			case 3:
 				break;

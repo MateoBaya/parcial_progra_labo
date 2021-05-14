@@ -1,59 +1,67 @@
-#include "contribuyente_estructura.h"
+#include "recaudaciones_estructura.h"
 
 ///////////////////////////////////FUNCIONES_ABM///////////////////////////////////////////////////////
 
-int ABMAltaC(eContribuyentes varContribuyente[],int len,int * id)
+int ABMAltaR(eRecaudaciones varGeneral[],int len,int * id)
 {
-	int funciona=0;
+	int funcionar=0;
 	int i=0;
 	int error;
-	char auxTexto[MAXCHAR];
+	int auxEntero;
+	float auxFloat;
 
-		if(varContribuyente != NULL)
+	while(varGeneral[i].isEmpty==0)
+	{
+		i++;
+	}
+	if(varGeneral[i].isEmpty==1)
+	{
+		*id=*id+1;
+		varGeneral[i].idRecaudaciones=*id;
+
+		do
 		{
+			printf("Cargue id de contribuyente: ");
+			error = cargarNumero(&auxEntero);
+		}while(error);
 
-			while(varContribuyente[i].isEmpty==0)
-			{
-				i++;
-			}
-			if(varContribuyente[i].isEmpty==1)
-			{
-				*id=*id+1;
-				varContribuyente[i].idContribuyente=*id;
+		varGeneral[i].idContribuyente = auxEntero;
 
-				printf("Cargue el CUIL: ");
-				do
-				{
-					error=cargarTexto(auxTexto);
-				}while(error == 0);
-				strcpy(varContribuyente[i].CUIL,auxTexto);
+		do
+		{
+			printf("Cargue numero de mes: ");
+			error = cargarNumero(&auxEntero);
+		}while(error);
 
-				printf("Cargue el nombre: ");
-				do
-				{
-					error=cargarTexto(auxTexto);
-				}while(error==0);
-				strcpy(varContribuyente[i].nombre,auxTexto);
+		varGeneral[i].mes = auxEntero;
 
-				printf("Cargue el apellido: ");
-				do
-				{
-					error=cargarTexto(auxTexto);
-				}while(error==0);
-				strcpy(varContribuyente[i].apellido,auxTexto);
+		do
+		{
+			printf("Cargue tipo de Recaudacion [1]-ARBA [2]-IIBB [3]-GANANCIAS: ");
+			error = cargarNumero(&auxEntero);
+		}while(error);
 
-				varContribuyente[i].isEmpty=0;
-			}
+		do
+		{
+			printf("Cargue importe: ");
+			error = cargarFloat(&auxFloat);
+		}while(error);
+
+		varGeneral[i].importe = auxFloat;
+
+
+		varGeneral[i].estado=DEBE;
+		varGeneral[i].isEmpty=0;
 	}
 
-	return funciona;
+	return funcionar;
 }
 
-int ABMLecturaC(eContribuyentes varGeneral[],int len)
+int ABMLecturaR(eRecaudaciones varGeneral[],int len)
 {
 	int funcionar=0;
 	printf("\n************************************************************************************************\n");
-	printf("   Id   |    CUIL    |     Nombre    |    Apellido   \n");
+	printf("   Id   | 4L | 4L  |  6L  |  6L   |   8L  |    8L    |   9L\n");
 	printf("************************************************************************************************\n");
 
 	for(int i=0;i<len;i++)
@@ -61,7 +69,7 @@ int ABMLecturaC(eContribuyentes varGeneral[],int len)
 
 		if(varGeneral[i].isEmpty==0)
 		{
-			mostrarEstructuraC(varGeneral,i);
+			mostrarEstructuraR(varGeneral,i);
 			funcionar=1;
 		}
 	}
@@ -70,20 +78,20 @@ int ABMLecturaC(eContribuyentes varGeneral[],int len)
 	return funcionar;
 }
 
-int ABMBajaC(eContribuyentes varGeneral[],int len)
+int ABMBajaR(eRecaudaciones varGeneral[],int len)
 {
 	int funcionar=0;
 	int posicionACambiar;
 
 	if(varGeneral != NULL)
 		{
-		posicionACambiar=buscarIdC(varGeneral,len);
+		posicionACambiar=buscarIdR(varGeneral,len);
 		if(posicionACambiar==-1)
 		{
 			printf("No se encontro el id, reintente");
 		}else{
-			printf("   Id   |    CUIL    |     Nombre    |    Apellido   \n");
-			if(validarIntencionUsuarioC(varGeneral, posicionACambiar, "ESTRUCTURA", "eliminar"))
+			printf("   Id   | 4L | 4L  |  6L  |  6L   |   8L  |    8L    |   9L\n");
+			if(validarIntencionUsuarioR(varGeneral, posicionACambiar, "ESTRUCTURA", "eliminar"))
 			{
 				varGeneral[posicionACambiar].isEmpty = 1;
 			}
@@ -92,27 +100,29 @@ int ABMBajaC(eContribuyentes varGeneral[],int len)
 	return funcionar;
 }
 
-int ABMModificarC(eContribuyentes varGeneral[],int len,const char * deseoModificar,const char * mensajeOpcion1,
-const char * mensajeOpcion2,const char * mensajeOpcion3)
+int ABMModificarR(eRecaudaciones varGeneral[],int len,const char * deseoModificar,const char * mensajeOpcion1,
+const char * mensajeOpcion2,const char * mensajeOpcion3,const char * mensajeOpcion4)
 {
 	int funcionar=0;
 	int posicionACambiar;
 	char elegir;
 	int flagError=1;
+	int auxEntero;
 	char auxTexto[MAXCHAR];
 	if(varGeneral != NULL)
 	{
-		posicionACambiar = buscarIdC(varGeneral, len);
+		posicionACambiar = buscarIdR(varGeneral, len);
 		if(posicionACambiar==-1)
 		{
 			printf("No se encontro el legajo, reintente");
 		}else{
-			printf("   Id   |    CUIL    |     Nombre    |    Apellido   \n");
-			if(validarIntencionUsuarioC(varGeneral, posicionACambiar, "ESTRUCTURA", "modificar"))
+			printf("   Id   | 4L | 4L  |  6L  |  6L   |   8L  |    8L    |   9L\n");
+			if(validarIntencionUsuarioR(varGeneral, posicionACambiar, "ESTRUCTURA", "modificar"))
 			{
 
-				printf("Desea modificar %s, [c]-CUIL, [n]-Nombre, [a]-Apellido: ",deseoModificar);
-				cargarCaracter(&elegir);
+				printf("Desea modificar %s: ",deseoModificar);
+				fflush(stdin);
+				scanf("%c",&elegir);
 				do
 				{
 					if(flagError)
@@ -124,7 +134,7 @@ const char * mensajeOpcion2,const char * mensajeOpcion3)
 					}
 					switch(elegir)
 					{
-						case 'c':
+						case 'd':
 							printf("Ingrese un %s nuevo: ",mensajeOpcion1);
 							cargarTexto(auxTexto);
 							if (auxTexto==0)
@@ -132,32 +142,23 @@ const char * mensajeOpcion2,const char * mensajeOpcion3)
 								printf("ERROR. Demasiados caracteres, reintente.");
 							}else
 							{
-								strcpy(varGeneral[posicionACambiar].CUIL,auxTexto);
 							}
 							break;
-						case 'n':
+						case 'X':
 							printf("Ingrese un %s nuevo: ",mensajeOpcion2);
-							cargarTexto(auxTexto);
-							if (auxTexto==0)
-							{
-								printf("ERROR. Demasiados caracteres, reintente.");
-							}else
-							{
-								strcpy(varGeneral[posicionACambiar].nombre,auxTexto);
-							}
-
 							break;
-						case 'a':
+						case 'Y':
 							printf("Ingrese un %s nuevo: ",mensajeOpcion3);
-							cargarTexto(auxTexto);
-							if (auxTexto==0)
+							auxEntero=cargarNumero(&auxEntero);
+							if (auxEntero)
 							{
-								printf("ERROR. Demasiados caracteres, reintente.");
+								printf("ERROR. No escribio un numero, reintente.");
 							}else
 							{
-								strcpy(varGeneral[posicionACambiar].apellido,auxTexto);
+								varGeneral[posicionACambiar].tipo = auxEntero;
 							}
 							break;
+
 						default:
 							elegir='0';
 							break;
@@ -170,7 +171,7 @@ const char * mensajeOpcion2,const char * mensajeOpcion3)
 	return funcionar;
 }
 
-int ABMinformesC()
+int ABMinformesR()
 {
 	int funcionar=0;
 	int decidir;
@@ -199,14 +200,14 @@ int ABMinformesC()
 
 ///////////////////////////////////BUSQUEDA_INFORMACION////////////////////////////////////////////////
 
-int mostrarEstructuraC(eContribuyentes varGeneral[],int i)
+int mostrarEstructuraR(eRecaudaciones varGeneral[],int i)
 {
 	int funcionar=0;
-	printf("  %-5d     %-15s  %-10s   %-10s   \n",varGeneral[i].idContribuyente,varGeneral[i].CUIL,varGeneral[i].nombre,varGeneral[i].apellido);
+	printf(/*" %-5d     %-5c  %-5d    %-5d       %-5d      %-10f      %-15s    %-5d\n"*/"%-5d\n",varGeneral[i].idRecaudaciones);
 	return funcionar;
 }
 
-int buscarIdC(eContribuyentes varGeneral[],int len)
+int buscarIdR(eRecaudaciones varGeneral[],int len)
 {
 	int posicion=-1;
 	int i;
@@ -219,7 +220,7 @@ int buscarIdC(eContribuyentes varGeneral[],int len)
 		{
 			if(varGeneral[i].isEmpty==0)
 			{
-				if(varGeneral[i].idContribuyente == id)
+				if(varGeneral[i].idRecaudaciones == id)
 				{
 					posicion = i;
 					break;
@@ -229,8 +230,8 @@ int buscarIdC(eContribuyentes varGeneral[],int len)
 	}
 	return posicion;
 }
-
-int buscarDescripcionC(eContribuyentes varGeneral[],int len)
+/*
+int buscarDescripcionR(eRecaudaciones varGeneral[],int len)
 {
 	int id=-1;
 	int i;
@@ -241,9 +242,9 @@ int buscarDescripcionC(eContribuyentes varGeneral[],int len)
 	{
 		if(varGeneral[i].isEmpty==0)
 		{
-			if(strcmp(auxString,varGeneral[i].nombre)==0)
+			if(strcmp(auxString,varGeneral[i].descripcion)==0)
 			{
-				id = varGeneral[i].idContribuyente;
+				id = varGeneral[i].idRecaudaciones;
 				break;
 			}
 		}
@@ -251,17 +252,18 @@ int buscarDescripcionC(eContribuyentes varGeneral[],int len)
 
 	return id;
 }
+*/
 
 ///////////////////////////////////VALIDACIONES_ESTRUCTURAS////////////////////////////////////////////
 
-int validarIdC(eContribuyentes varGeneral[],int len,int numero)
+int validarIdR(eRecaudaciones varGeneral[],int len,int numero)
 {
 	int funcionar=0;
 	if(varGeneral != NULL)
 	{
 		for(int i=0;i<len;i++)
 		{
-			if (varGeneral[i].idContribuyente==numero)
+			if (varGeneral[i].idRecaudaciones==numero)
 			{
 				funcionar=1;
 			}
@@ -270,7 +272,7 @@ int validarIdC(eContribuyentes varGeneral[],int len,int numero)
 	return funcionar;
 }
 
-int validarIntencionUsuarioC(eContribuyentes varGeneral[],int posicionACambiar,const char * mensaje,const char * textoAValidar)
+int validarIntencionUsuarioR(eRecaudaciones varGeneral[],int posicionACambiar,const char * mensaje,const char * textoAValidar)
 {
 	int funcionar=0;
 	char decidir;
@@ -279,7 +281,7 @@ int validarIntencionUsuarioC(eContribuyentes varGeneral[],int posicionACambiar,c
 	{
 		do
 		{
-			mostrarEstructuraC(varGeneral, posicionACambiar);
+			mostrarEstructuraR(varGeneral, posicionACambiar);
 			printf("\nSeguro que quiere %s este %s s/n: ",textoAValidar,mensaje);
 			cargarCaracter(&decidir);
 			sinError=validarSoN(decidir);
@@ -294,7 +296,7 @@ int validarIntencionUsuarioC(eContribuyentes varGeneral[],int posicionACambiar,c
 
 //////////////////////////////////////////FUNCIONES_ESTRUCTURAS////////////////////////////////////////
 
-int inicializarisEmptyC(eContribuyentes varGeneral[],int len)
+int inicializarisEmptyR(eRecaudaciones varGeneral[],int len)
 {
 	int funcionar=0;
 	if(varGeneral != NULL)
@@ -309,26 +311,25 @@ int inicializarisEmptyC(eContribuyentes varGeneral[],int len)
 	return funcionar;
 }
 /*
-int promediar(eContribuyentes varGeneral[],int i,float * resultado)
+int promediar(eRecaudaciones varGeneral[],int i,float * resultado)
 {
 	int funcionar=0;
 
 	if(varGeneral != NULL)
 	{
-		*resultado = (varGeneral[i].CUIL + varGeneral[i].valor2)/2;
+		*resultado = (varGeneral[i].valor1 + varGeneral[i].valor2)/2;
 		funcionar=1;
 	}
 
 	return funcionar;
 }
-*/
-/*
-int multiplicar(eContribuyentes varGeneral[],int i,int * resultado)
+
+int multiplicar(eRecaudaciones varGeneral[],int i,int * resultado)
 {
 	int funcionar=0;
 	if(varGeneral != NULL)
 	{
-		*resultado = varGeneral[i].CUIL * varGeneral[i].valor2;
+		*resultado = varGeneral[i].valor1 * varGeneral[i].valor2;
 		funcionar=1;
 	}
 	return funcionar;
@@ -337,12 +338,11 @@ int multiplicar(eContribuyentes varGeneral[],int i,int * resultado)
 
 ///////////////////////////////////////ORDENAMIENTOS////////////////////////////////////////////////////
 
-int ordenarPorIdC(eContribuyentes varGeneral[],int len)
+int ordenarPorIdR(eRecaudaciones varGeneral[],int len)
 {
 	int funcionar=0;
 	int flagNoOrdenado=1;
 		int aux;
-		char auxArrayTexto[MAXCHAR];
 		if(varGeneral != NULL)
 		{
 			while(flagNoOrdenado)
@@ -350,15 +350,11 @@ int ordenarPorIdC(eContribuyentes varGeneral[],int len)
 				flagNoOrdenado=0;
 				for(int i=1; i<len;i++)
 				{
-					if(varGeneral[i].idContribuyente < varGeneral[i-1].idContribuyente)
+					if(varGeneral[i].idRecaudaciones < varGeneral[i-1].idRecaudaciones)
 					{
-						aux=varGeneral[i].idContribuyente;
-						varGeneral[i].idContribuyente=varGeneral[i-1].idContribuyente;
-						varGeneral[i-1].idContribuyente=aux;
-
-						strcpy(auxArrayTexto,varGeneral[i].nombre);
-						strcpy(varGeneral[i].nombre,varGeneral[i-1].nombre);
-						strcpy(varGeneral[i-1].nombre,auxArrayTexto);
+						aux=varGeneral[i].idRecaudaciones;
+						varGeneral[i].idRecaudaciones=varGeneral[i-1].idRecaudaciones;
+						varGeneral[i-1].idRecaudaciones=aux;
 
 					}
 
@@ -368,3 +364,20 @@ int ordenarPorIdC(eContribuyentes varGeneral[],int len)
 		}
 	return funcionar;
 }
+
+/*
+void hardCodearRecaudacion(eRecaudaciones recaudacion[], int len)
+{
+    int i;
+    int estado[]= {DEBE,REFINANCIAR,SALDADO};
+    char descripcionCarrera[][MAXCHAR]= {"Progra","Analisis"};
+    for(i=0; i<2; i++)
+    {
+    	recaudacion[i].estado = estado[i];
+
+
+    }
+
+
+}
+*/

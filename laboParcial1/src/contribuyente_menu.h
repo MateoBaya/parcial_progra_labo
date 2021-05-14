@@ -2,6 +2,6 @@
 #define CONTRIBUYENTE_MENU_H_
 #include "contribuyente_estructura.h"
 
-int menuABM(eContribuyentes varGeneral[],int len,char texto[]);
+int menuContribuyente(eContribuyentes varGeneral[],int len,char texto[],int * legajo);
 
 #endif /* CONTRIBUYENTE_MENU_H_ */
