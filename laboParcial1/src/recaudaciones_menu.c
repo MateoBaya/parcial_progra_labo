@@ -16,11 +16,9 @@ int menuRecaudaciones(eRecaudaciones varGeneral[],int len,char texto[],int * leg
 			printf("\n///////////////////////////////////////////\n");
 			printf("///    %-13s                    ///\n",texto);
 			printf("///      [1]-ALTA                       ///\n");
-			printf("///      [2]-BAJA                       ///\n");
-			printf("///      [3]-LECTURA                    ///\n");
-			printf("///      [4]-MODIFICAR                  ///\n");
-			printf("///      [5]-INFORME                    ///\n");
-			printf("///      [6]-SALIR                      ///\n");
+			printf("///      [2]-LECTURA                    ///\n");
+			printf("///      [3]-MODIFICAR                  ///\n");
+			printf("///      [4]-SALIR                      ///\n");
 			printf("///                                     ///\n");
 			printf("///////////////////////////////////////////\n");
 
@@ -35,27 +33,24 @@ int menuRecaudaciones(eRecaudaciones varGeneral[],int len,char texto[],int * leg
 				funcionar=1;
 				break;
 			case 2:
-				ABMBajaR(varGeneral,len);
-				funcionar=1;
-				break;
-			case 3:
 				ABMLecturaR(varGeneral, len);
 				funcionar=1;
 				break;
-			case 4:
+			case 3:
 				ABMModificarR(varGeneral, len, "ESTRUCTURA", "DESCRIPCION", "CARACTER", "VALOR1", "VALOR2");
+				funcionar=1;
+				break;
+			case 4:
 				funcionar=1;
 				break;
 			case 5:
 
 				break;
-			case 6:
-				break;
 			default:
 				printf("Reingrese, no eligio una opcion valida\n");
 				break;
 			}
-		}while(eleccionUsuario!=6);
+		}while(eleccionUsuario!=4);
 	}
 	return funcionar;
 }

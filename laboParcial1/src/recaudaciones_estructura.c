@@ -61,7 +61,7 @@ int ABMLecturaR(eRecaudaciones varGeneral[],int len)
 {
 	int funcionar=0;
 	printf("\n************************************************************************************************\n");
-	printf("   Id   | 4L | 4L  |  6L  |  6L   |   8L  |    8L    |   9L\n");
+	printf("   IdRec   | IdCont | Estado  |  Importe  |  Mes   |   Tipo  \n");
 	printf("************************************************************************************************\n");
 
 	for(int i=0;i<len;i++)
@@ -105,10 +105,9 @@ const char * mensajeOpcion2,const char * mensajeOpcion3,const char * mensajeOpci
 {
 	int funcionar=0;
 	int posicionACambiar;
-	char elegir;
+	int elegir;
+	char elegirchar;
 	int flagError=1;
-	int auxEntero;
-	char auxTexto[MAXCHAR];
 	if(varGeneral != NULL)
 	{
 		posicionACambiar = buscarIdR(varGeneral, len);
@@ -120,9 +119,9 @@ const char * mensajeOpcion2,const char * mensajeOpcion3,const char * mensajeOpci
 			if(validarIntencionUsuarioR(varGeneral, posicionACambiar, "ESTRUCTURA", "modificar"))
 			{
 
-				printf("Desea modificar %s: ",deseoModificar);
+				printf("Desea modificar %s [1]-Refinanciar [2]-Saldar: ",deseoModificar);
 				fflush(stdin);
-				scanf("%c",&elegir);
+				scanf("%d",&elegir);
 				do
 				{
 					if(flagError)
@@ -134,29 +133,25 @@ const char * mensajeOpcion2,const char * mensajeOpcion3,const char * mensajeOpci
 					}
 					switch(elegir)
 					{
-						case 'd':
-							printf("Ingrese un %s nuevo: ",mensajeOpcion1);
-							cargarTexto(auxTexto);
-							if (auxTexto==0)
+						case 1:
+							printf("Cambiar a %s: ",mensajeOpcion1);
+							cargarCaracter(&elegirchar);
+							validarSoN(elegirchar);
+							if(elegirchar== 's')
 							{
-								printf("ERROR. Demasiados caracteres, reintente.");
-							}else
-							{
+								varGeneral[posicionACambiar].estado=REFINANCIAR;
 							}
+
 							break;
-						case 'X':
-							printf("Ingrese un %s nuevo: ",mensajeOpcion2);
-							break;
-						case 'Y':
-							printf("Ingrese un %s nuevo: ",mensajeOpcion3);
-							auxEntero=cargarNumero(&auxEntero);
-							if (auxEntero)
+						case 2:
+							printf("Cambiar a %s: ",mensajeOpcion2);
+							cargarCaracter(&elegirchar);
+							validarSoN(elegirchar);
+							if(elegirchar== 's')
 							{
-								printf("ERROR. No escribio un numero, reintente.");
-							}else
-							{
-								varGeneral[posicionACambiar].tipo = auxEntero;
+								varGeneral[posicionACambiar].estado=SALDADO;
 							}
+
 							break;
 
 						default:
@@ -203,7 +198,7 @@ int ABMinformesR()
 int mostrarEstructuraR(eRecaudaciones varGeneral[],int i)
 {
 	int funcionar=0;
-	printf(/*" %-5d     %-5c  %-5d    %-5d       %-5d      %-10f      %-15s    %-5d\n"*/"%-5d\n",varGeneral[i].idRecaudaciones);
+	printf(" %-5d    %-5d    %-5d      %-5f      %-5d      %-5d   \n",varGeneral[i].idRecaudaciones,varGeneral[i].idContribuyente,varGeneral[i].estado,varGeneral[i].importe,varGeneral[i].mes,varGeneral[i].tipo);
 	return funcionar;
 }
 

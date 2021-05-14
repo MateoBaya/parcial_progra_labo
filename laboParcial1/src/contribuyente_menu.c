@@ -19,8 +19,7 @@ int menuContribuyente(eContribuyentes varGeneral[],int len,char texto[],int * le
 			printf("///      [2]-BAJA                       ///\n");
 			printf("///      [3]-LECTURA                    ///\n");
 			printf("///      [4]-MODIFICAR                  ///\n");
-			printf("///      [5]-INFORME                    ///\n");
-			printf("///      [6]-SALIR                      ///\n");
+			printf("///      [5]-SALIR                      ///\n");
 			printf("///                                     ///\n");
 			printf("///////////////////////////////////////////\n");
 
@@ -49,13 +48,11 @@ int menuContribuyente(eContribuyentes varGeneral[],int len,char texto[],int * le
 			case 5:
 
 				break;
-			case 6:
-				break;
 			default:
 				printf("Reingrese, no eligio una opcion valida\n");
 				break;
 			}
-		}while(eleccionUsuario!=6);
+		}while(eleccionUsuario!=5);
 	}
 	return funcionar;
 }
